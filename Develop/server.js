@@ -1,13 +1,14 @@
 const express = require('express');
 const path = require('path');
-const { v4: uuidv4 } = require('uuid');
 const { readAndAppend } = require('./helpers/fsUtils');
 
+const { clog } = require('./middleware/clog');
 const notesRouter = require('./routes/notes')
 const PORT = process.env.port || 3001;
 
 const app = express();
 
+app.use(clog);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
